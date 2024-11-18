@@ -6,7 +6,7 @@
 #    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
-#    Updated: 2024/11/18 17:56:59 by halnuma          ###   ########.fr        #
+#    Updated: 2024/11/18 18:03:23 by halnuma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,9 @@ _CYAN			= \033[0;36m
 # ------ VARIABLES ------
 
 NAME			= libftprintf.a
-CC 				= cc
+CC				= cc
 AR				= ar -rcs
-CFLAGS 			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 
 # ------ PATHS ------
 
