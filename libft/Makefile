@@ -1,5 +1,4 @@
-.PHONY: all clean fclean re loading
-
+.PHONY: all clean fclean re
 # ----- COLORS -----
 
 _END			= \033[0m
@@ -55,17 +54,14 @@ HEADER 			= $(P_INC)libft.h
 
 # ----- RULES -----
 
-all: 			$(NAME)
+all: 			$(NAME) 
 
 $(NAME): 		$(OBJ) Makefile $(HEADER)
 				@ar -rcs $(NAME) $(OBJ)
 				@echo "$(_GREEN)Libft compiled!$(_END)"
 
-%.o : 			%.c Makefile $(HEADER) | loading
+%.o : 			%.c Makefile $(HEADER)
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
-
-loading:
-				@echo "$(_YELLOW)Compiling Libft...$(_END)"
 
 bonus: 
 				@make OBJ="$(OBJALL)"

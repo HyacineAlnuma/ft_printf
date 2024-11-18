@@ -6,11 +6,11 @@
 #    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
-#    Updated: 2024/11/18 12:00:50 by halnuma          ###   ########.fr        #
+#    Updated: 2024/11/18 17:56:59 by halnuma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re loading
+.PHONY: all clean fclean re
 
 # ------ COLORS ------
 
@@ -39,26 +39,28 @@ P_LIB			= libft/
 
 # ------ FILES ------
 
-FILES			= ft_printf
+FILES			= ft_printf				ft_putnbr_base_fd		\
+				ft_putunbr_base_fd		ft_putunbr_fd	
+
 SRC				= $(addprefix $(P_SRC), $(addsuffix .c, $(FILES)))
 OBJ 			= $(addprefix $(P_OBJ), $(addsuffix .o, $(FILES)))
+LIBFT			= $(P_LIB)libft.a
 
 # ------ RULES ------
 
 all: 			make_libft $(NAME)
 
-$(NAME): 		$(OBJ) Makefile $(P_LIB)libft.a
+$(NAME): 		$(OBJ) Makefile $(LIBFT)
+				@cp $(LIBFT) $(NAME)
 				@$(AR) $(NAME) $(OBJ)
 				@echo "$(_GREEN)ft_printf compiled!$(_END)"
 
 $(P_OBJ):
 				@mkdir -p $(P_OBJ)
 
-$(P_OBJ)%.o:	$(P_SRC)%.c | $(P_OBJ) loading
+$(P_OBJ)%.o:	$(P_SRC)%.c | $(P_OBJ)
+				@echo "$(_YELLOW)Compiling $<$(_END)"
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
-
-loading:
-				@echo "$(_YELLOW)Compiling ft_printf...$<$(_END)"
 
 make_libft:
 				@$(MAKE) -C $(P_LIB) bonus --no-print-directory

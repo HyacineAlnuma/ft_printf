@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 12:25:51 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/18 16:00:30 by halnuma          ###   ########.fr       */
+/*   Created: 2024/11/18 17:22:23 by halnuma           #+#    #+#             */
+/*   Updated: 2024/11/18 17:56:30 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putunbr_fd(unsigned int n, int fd)
 {
-	while (*s)
-		write(fd, s++, 1);
+	if (n > 9)
+	{
+		ft_putunbr_fd((n / 10), fd);
+		ft_putchar_fd((n % 10) + '0', fd);
+	}
+	else
+	{
+		ft_putchar_fd((n % 10) + '0', fd);
+	}
 }

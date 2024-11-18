@@ -6,7 +6,7 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:58:51 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/18 11:20:04 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/18 17:31:34 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdint.h>
 # include <limits.h>
 # include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_list
 {
