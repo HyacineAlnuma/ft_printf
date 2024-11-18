@@ -6,12 +6,12 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:02:04 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/14 15:27:31 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/18 11:25:46 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_printf(const char *input, ...)
 {
@@ -82,8 +82,8 @@ int	ft_printf(const char *input, ...)
 	return (0);
 }
 
-int	main(void)
-{
-	ft_printf("yo %i test", 2);
-	return (0);
-}
+// int	main(void)
+// {
+// 	ft_printf("yo %i test", 2);
+// 	return (0);
+// }

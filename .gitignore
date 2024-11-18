@@ -1,4 +1,4 @@
-*.o
-ft_printf.a.a
-a.out
-test1
+obj/*
+libftprintf.a
+src/a.out
+src/test1

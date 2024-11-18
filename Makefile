@@ -1,61 +1,82 @@
-NAME = ft_printf.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
+#    Updated: 2024/11/18 12:00:50 by halnuma          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRC = ft_printf.c 
+.PHONY: all clean fclean re loading
 
-OBJ = $(SRC:.c=.o)
+# ------ COLORS ------
 
-OBJALL = $(SRCALL:.c=.o)
+_END			= \033[0m
+_GREY			= \033[0;30m
+_RED			= \033[0;31m
+_GREEN			= \033[0;32m
+_YELLOW			= \033[0;33m
+_BLUE			= \033[0;34m
+_PURPLE			= \033[0;35m
+_CYAN			= \033[0;36m
 
-CC = cc
+# ------ VARIABLES ------
 
-CFLAGS = -Wall -Wextra -Werror
+NAME			= libftprintf.a
+CC 				= cc
+AR				= ar -rcs
+CFLAGS 			= -Wall -Wextra -Werror
 
-all: make_libft $(NAME)
+# ------ PATHS ------
 
-#	%.o	= all what ends by ".o" 
-#	$@	= the file name of the target of the rule
-#	$<	= the name of the first prerequisite
-#	$^	= is the name of all the prerequisites, with spaces between them
-#	$?	= the name of all the prerequisites that are newer than the target, with spaces between them. 
-#		  If the target does not exist, all prerequisites will be included
-#
-# Example :
-#
-#	hello: one two
-#		@echo $@
-#		@echo $<
-#		@echo $?
-#		@echo $^
-#	->
-#	hello
-#	one
-#	one two
-#	one two
+P_OBJ 			= obj/
+P_SRC 			= src/
+P_INC			= includes/
+P_LIB			= libft/
 
-%.o : %.c Makefile $(HEADER)
-	$(CC) $(CFLAGS) -I . -I ./libft -c $< -o $@
+# ------ FILES ------
+
+FILES			= ft_printf
+SRC				= $(addprefix $(P_SRC), $(addsuffix .c, $(FILES)))
+OBJ 			= $(addprefix $(P_OBJ), $(addsuffix .o, $(FILES)))
+
+# ------ RULES ------
+
+all: 			make_libft $(NAME)
+
+$(NAME): 		$(OBJ) Makefile $(P_LIB)libft.a
+				@$(AR) $(NAME) $(OBJ)
+				@echo "$(_GREEN)ft_printf compiled!$(_END)"
+
+$(P_OBJ):
+				@mkdir -p $(P_OBJ)
+
+$(P_OBJ)%.o:	$(P_SRC)%.c | $(P_OBJ) loading
+				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
+
+loading:
+				@echo "$(_YELLOW)Compiling ft_printf...$<$(_END)"
 
 make_libft:
-	$(MAKE) -C libft/
+				@$(MAKE) -C $(P_LIB) bonus --no-print-directory
 
-$(NAME): $(OBJ) Makefile ./libft/libft.a
-	ar -rcs $(NAME) $(OBJ)
-
-bonus: 
-	@make OBJ="$(OBJALL)"
+# ------ BASIC RULES ------
 
 clean: 
-	rm -rf *.o
+				@rm -rf $(P_OBJ)
+				@$(MAKE) -C $(P_LIB) clean --no-print-directory
+				@echo "$(_CYAN)ft_printf cleaned!$(_END)"
 
 fclean:
-	$(MAKE) clean
-	$(MAKE) -C libft/ fclean --no-print-directory
-	rm -rf libft.a
+				@$(MAKE) clean --no-print-directory
+				@$(MAKE) -C $(P_LIB) fclean --no-print-directory
+				@rm -rf libftprintf.a 
+				@echo "$(_CYAN)ft_printf full cleaned!$(_END)"
 
 re:
-	$(MAKE) fclean
-	$(MAKE) all
-
-.PHONY: all clean fclean re
-
-
+				@$(MAKE) fclean --no-print-directory
+				@$(MAKE) all --no-print-directory
+				@echo "$(_CYAN)ft_printf rebuilt!$(_END)"
