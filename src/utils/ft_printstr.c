@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base_fd.c                                :+:      :+:    :+:   */
+/*   ft_printstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 12:55:32 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/18 17:51:06 by halnuma          ###   ########.fr       */
+/*   Created: 2024/11/19 09:29:07 by halnuma           #+#    #+#             */
+/*   Updated: 2024/11/19 09:35:37 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "ft_printf.h"
 
-void	ft_putnbr_base_fd(size_t n, char *base, int fd)
+int	ft_printstr(char *s)
 {
-	size_t	base_len;
+	int	count;
 
-	base_len = ft_strlen(base);
-	if (n < 0)
+	count = 0;
+	while (*s)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putnbr_base_fd(n * -1, base, fd);
+		write(1, s++, 1);
+		count++;
 	}
-	else
-	{
-		if (n >= base_len)
-		{
-			ft_putnbr_base_fd((n / base_len), base, fd);
-			ft_putchar_fd(base[n % base_len], fd);
-		}
-		else
-		{
-			ft_putchar_fd(base[n % base_len], fd);
-		}
-	}
+	return (count);
 }

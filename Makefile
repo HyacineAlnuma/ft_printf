@@ -6,7 +6,7 @@
 #    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
-#    Updated: 2024/11/18 18:03:23 by halnuma          ###   ########.fr        #
+#    Updated: 2024/11/19 12:20:37 by halnuma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,25 +34,34 @@ CFLAGS			= -Wall -Wextra -Werror
 
 P_OBJ 			= obj/
 P_SRC 			= src/
+P_UTILS			= $(P_SRC)utils/
 P_INC			= includes/
 P_LIB			= libft/
 
 # ------ FILES ------
 
-FILES			= ft_printf				ft_putnbr_base_fd		\
-				ft_putunbr_base_fd		ft_putunbr_fd	
+MAIN			= ft_printf	
 
-SRC				= $(addprefix $(P_SRC), $(addsuffix .c, $(FILES)))
-OBJ 			= $(addprefix $(P_OBJ), $(addsuffix .o, $(FILES)))
+UTILS			= ft_printchar				ft_printstr			\
+				ft_printnbr					ft_printptr			\
+				ft_printhex		
+
+SRC_MAIN		= $(addprefix $(P_SRC), $(addsuffix .c, $(MAIN)))
+OBJ_MAIN 		= $(addprefix $(P_OBJ), $(addsuffix .o, $(MAIN)))
+SRC_UTILS		= $(addprefix $(P_UTILS), $(addsuffix .c, $(UTILS)))
+OBJ_UTILS 		= $(addprefix $(P_OBJ), $(addsuffix .o, $(UTILS)))
+
+SRC_ALL			= $(SRC_MAIN) $(SRC_UTILS)
+OBJ_ALL 		= $(OBJ_MAIN) $(OBJ_UTILS)
 LIBFT			= $(P_LIB)libft.a
 
 # ------ RULES ------
 
 all: 			make_libft $(NAME)
 
-$(NAME): 		$(OBJ) Makefile $(LIBFT)
+$(NAME): 		$(OBJ_ALL) Makefile $(LIBFT)
 				@cp $(LIBFT) $(NAME)
-				@$(AR) $(NAME) $(OBJ)
+				@$(AR) $(NAME) $(OBJ_ALL)
 				@echo "$(_GREEN)ft_printf compiled!$(_END)"
 
 $(P_OBJ):
@@ -61,6 +70,13 @@ $(P_OBJ):
 $(P_OBJ)%.o:	$(P_SRC)%.c | $(P_OBJ)
 				@echo "$(_YELLOW)Compiling $<$(_END)"
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
+
+$(P_OBJ)%.o:	$(P_UTILS)%.c | $(P_OBJ)
+				@echo "$(_YELLOW)Compiling $<$(_END)"
+				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
+
+test:
+	@echo "$(SRC_ALL)"
 
 make_libft:
 				@$(MAKE) -C $(P_LIB) bonus --no-print-directory
