@@ -6,7 +6,7 @@
 #    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
-#    Updated: 2024/11/20 10:56:35 by halnuma          ###   ########.fr        #
+#    Updated: 2024/11/20 10:58:47 by halnuma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,9 +75,6 @@ $(P_OBJ)%.o:	$(P_SRC)%.c Makefile $(HEADERS) | $(P_OBJ)
 $(P_OBJ)%.o:	$(P_UTILS)%.c Makefile $(HEADERS) | $(P_OBJ)
 				@echo "$(_YELLOW)Compiling $<$(_END)"
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
-
-test:
-	@echo "$(HEADERS)\n"
 
 make_libft:
 				@$(MAKE) -C $(P_LIB) bonus --no-print-directory
