@@ -6,28 +6,37 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:25:42 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/19 12:48:30 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/20 09:59:13 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-void	ft_putunbr_base(unsigned int n, char *base)
+int	ft_printhex(unsigned int n, int base_case)
 {
-	unsigned int	base_len;
+	char	*base;
 
-	base_len = ft_strlen(base);
-	if (n >= base_len)
+	if (!n)
 	{
-		ft_putunbr_base((n / base_len), base);
-		ft_printchar(base[n % base_len]);
+		ft_printchar('0');
+		return (1);
+	}
+	if (base_case == 0)
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	if (n >= 16)
+	{
+		ft_printhex((n / 16), base_case);
+		ft_printchar(base[n % 16]);
 	}
 	else
-		ft_printchar(base[n % base_len]);
+		ft_printchar(base[n % 16]);
+	return (ft_hexlen(n, base, 0));
 }
 
-int	ft_unbrlen_base(unsigned int n, char *base, int count)
+int	ft_hexlen(unsigned int n, char *base, int count)
 {
 	unsigned int	base_len;
 
@@ -35,7 +44,7 @@ int	ft_unbrlen_base(unsigned int n, char *base, int count)
 	if (n >= base_len)
 	{
 		count++;
-		return (ft_unbrlen_base((n / base_len), base, count));
+		return (ft_hexlen((n / base_len), base, count));
 	}
 	else
 	{

@@ -6,12 +6,27 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 10:23:16 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/19 12:24:07 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/20 09:32:04 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
+
+int	ft_printptr(size_t n, char *base)
+{
+	if (!n)
+	{
+		ft_printstr("(nil)");
+		return (5);
+	}
+	else
+	{
+		ft_printstr("0x");
+		ft_putnbr_base(n, base);
+		return (ft_ptrlen(n, base, 0) + 2);
+	}
+}
 
 void	ft_putnbr_base(size_t n, char *base)
 {

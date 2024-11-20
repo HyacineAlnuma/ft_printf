@@ -6,7 +6,7 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:58:51 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/19 12:42:01 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/20 10:56:13 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@
 # include <stdlib.h>
 
 int		ft_printf(const char *input, ...);
+int		ft_print_vars(va_list vars, char next);
 void	ft_putnbr_base(size_t n, char *base);
 int		ft_ptrlen(size_t n, char *base, int count);
-void	ft_putunbr_base(unsigned int n, char *base);
-int		ft_unbrlen_base(unsigned int n, char *base, int count);
-void	ft_putunbr(unsigned int n);
+int		ft_printhex(unsigned int n, int base_case);
+int		ft_hexlen(unsigned int n, char *base, int count);
+int		ft_printunbr(unsigned int n);
 int		ft_unbrlen(unsigned int n, int count);
 int		ft_printchar(char c);
 int		ft_printstr(char *s);
-void	ft_printnbr(int n);
+int		ft_printnbr(int n);
 int		ft_nbrlen(int n, int count);
+int		ft_printptr(size_t n, char *base);
 
 #endif

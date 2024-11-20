@@ -6,15 +6,20 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 09:29:01 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/19 12:38:37 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/20 09:57:49 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "ft_printf.h"
 
-void	ft_printnbr(int n)
+int	ft_printnbr(int n)
 {
+	if (!n)
+	{
+		ft_printchar('0');
+		return (1);
+	}
 	if (n == INT_MIN)
 		ft_printstr("-2147483648");
 	else if (n < 0)
@@ -32,19 +37,26 @@ void	ft_printnbr(int n)
 		else
 			ft_printchar((n % 10) + '0');
 	}
+	return (ft_nbrlen(n, 0));
 }
 
-void	ft_putunbr(unsigned int n)
+int	ft_printunbr(unsigned int n)
 {
+	if (!n)
+	{
+		ft_printchar('0');
+		return (1);
+	}
 	if (n > 9)
 	{
-		ft_putunbr((n / 10));
+		ft_printunbr((n / 10));
 		ft_printchar((n % 10) + '0');
 	}
 	else
 	{
 		ft_printchar((n % 10) + '0');
 	}
+	return (ft_unbrlen(n, 0));
 }
 
 int	ft_unbrlen(unsigned int n, int count)

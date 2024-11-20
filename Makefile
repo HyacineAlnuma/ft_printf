@@ -6,7 +6,7 @@
 #    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
-#    Updated: 2024/11/19 12:20:37 by halnuma          ###   ########.fr        #
+#    Updated: 2024/11/20 10:56:35 by halnuma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,12 +54,13 @@ OBJ_UTILS 		= $(addprefix $(P_OBJ), $(addsuffix .o, $(UTILS)))
 SRC_ALL			= $(SRC_MAIN) $(SRC_UTILS)
 OBJ_ALL 		= $(OBJ_MAIN) $(OBJ_UTILS)
 LIBFT			= $(P_LIB)libft.a
+HEADERS			= $(P_INC)libft.h 			$(P_INC)ft_printf.h
 
 # ------ RULES ------
 
 all: 			make_libft $(NAME)
 
-$(NAME): 		$(OBJ_ALL) Makefile $(LIBFT)
+$(NAME): 		$(OBJ_ALL) Makefile $(P_INC)
 				@cp $(LIBFT) $(NAME)
 				@$(AR) $(NAME) $(OBJ_ALL)
 				@echo "$(_GREEN)ft_printf compiled!$(_END)"
@@ -67,16 +68,16 @@ $(NAME): 		$(OBJ_ALL) Makefile $(LIBFT)
 $(P_OBJ):
 				@mkdir -p $(P_OBJ)
 
-$(P_OBJ)%.o:	$(P_SRC)%.c | $(P_OBJ)
+$(P_OBJ)%.o:	$(P_SRC)%.c Makefile $(HEADERS) | $(P_OBJ)
 				@echo "$(_YELLOW)Compiling $<$(_END)"
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
 
-$(P_OBJ)%.o:	$(P_UTILS)%.c | $(P_OBJ)
+$(P_OBJ)%.o:	$(P_UTILS)%.c Makefile $(HEADERS) | $(P_OBJ)
 				@echo "$(_YELLOW)Compiling $<$(_END)"
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
 
 test:
-	@echo "$(SRC_ALL)"
+	@echo "$(HEADERS)\n"
 
 make_libft:
 				@$(MAKE) -C $(P_LIB) bonus --no-print-directory
