@@ -1,4 +1,4 @@
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
 # ----- COLORS -----
 
 _END			= \033[0m
@@ -65,6 +65,7 @@ $(NAME): 		$(OBJ) Makefile $(HEADER)
 
 bonus: 
 				@make OBJ="$(OBJALL)"
+
 
 # ----- BASIC RULES -----
 

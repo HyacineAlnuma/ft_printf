@@ -6,11 +6,11 @@
 #    By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 08:45:55 by halnuma           #+#    #+#              #
-#    Updated: 2024/11/20 10:58:47 by halnuma          ###   ########.fr        #
+#    Updated: 2024/11/25 09:23:38 by halnuma          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft
 
 # ------ COLORS ------
 
@@ -58,7 +58,7 @@ HEADERS			= $(P_INC)libft.h 			$(P_INC)ft_printf.h
 
 # ------ RULES ------
 
-all: 			make_libft $(NAME)
+all: 			libft $(NAME)
 
 $(NAME): 		$(OBJ_ALL) Makefile $(P_INC)
 				@cp $(LIBFT) $(NAME)
@@ -76,7 +76,7 @@ $(P_OBJ)%.o:	$(P_UTILS)%.c Makefile $(HEADERS) | $(P_OBJ)
 				@echo "$(_YELLOW)Compiling $<$(_END)"
 				@$(CC) $(CFLAGS) -I $(P_INC) -c $< -o $@
 
-make_libft:
+libft:		
 				@$(MAKE) -C $(P_LIB) bonus --no-print-directory
 
 # ------ BASIC RULES ------
