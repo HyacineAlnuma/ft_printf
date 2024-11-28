@@ -6,7 +6,7 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:02:04 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/20 10:44:30 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/11/28 09:24:17 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ int	ft_print_vars(va_list vars, char next)
 	count = 0;
 	if (next == 'c')
 		count += ft_printchar(va_arg(vars, int));
-	if (next == 's')
+	else if (next == 's')
 		count += ft_printstr(va_arg(vars, char *));
-	if (next == 'p')
+	else if (next == 'p')
 		count += ft_printptr(va_arg(vars, size_t), "0123456789abcdef");
-	if (next == 'd')
+	else if (next == 'd')
 		count += ft_printnbr(va_arg(vars, int));
-	if (next == 'i')
+	else if (next == 'i')
 		count += ft_printnbr(va_arg(vars, int));
-	if (next == 'u')
+	else if (next == 'u')
 		count += ft_printunbr(va_arg(vars, unsigned int));
-	if (next == 'x')
+	else if (next == 'x')
 		count += ft_printhex(va_arg(vars, unsigned int), 0);
-	if (next == 'X')
+	else if (next == 'X')
 		count += ft_printhex(va_arg(vars, unsigned int), 1);
-	if (next == '%')
+	else
 		count += ft_printchar('%');
 	return (count);
 }
