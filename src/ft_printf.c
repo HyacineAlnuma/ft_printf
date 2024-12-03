@@ -6,7 +6,7 @@
 /*   By: halnuma <halnuma@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 14:02:04 by halnuma           #+#    #+#             */
-/*   Updated: 2024/11/28 09:24:17 by halnuma          ###   ########.fr       */
+/*   Updated: 2024/12/03 16:55:51 by halnuma          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_printf(const char *input, ...)
 
 	count = 0;
 	if (!input)
-		return (count);
+		return (-1);
 	va_start(vars, input);
 	i = 0;
 	while (input[i])
